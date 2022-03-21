@@ -5,12 +5,18 @@
         <h1 style="color: #1c2851">Connexion</h1>
       </div>
       <div class="email-div">
-        <input type="email" placeholder="Adress Email" />
+        <input type="email" placeholder="Adress Email" v-model="email" />
+        <div class="errors" v-if="errors_email !== null">
+          {{ errors_email }}
+        </div>
       </div>
       <div class="password-div">
-        <input type="password" placeholder="Mot de passe" />
+        <input type="password" placeholder="Mot de passe" v-model="password" />
+        <div class="errors" v-if="errors_password !== null">
+          {{ errors_password }}
+        </div>
       </div>
-      <button class="action">Se connecter</button>
+      <button class="action" @click="login">Se connecter</button>
       <span style="font-size: 12px"
         >Je n'ai pas encore de compte
         <span style="color: green; font-size: 12px; cursor: pointer"
@@ -22,12 +28,58 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+      errors_email: null,
+      errors_password: null,
+    };
+  },
+  methods: {
+    login() {
+      const url = "http://localhost:8000/api/login";
+
+      let login_credentials = {
+        email: this.email,
+        password: this.password,
+      };
+      let requestOptions = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(login_credentials),
+      };
+      fetch(url, requestOptions)
+        .then((response) => {
+          return response.json();
+        })
+        .then((result) => {
+          if (result.errors) {
+            if (result.errors.email) {
+              this.errors_email = result.errors.email[0];
+            }
+            if (result.errors.password) {
+              this.errors_password = result.errors.password[0];
+            }
+          }
+          if (result.token) {
+            console.log(result);
+            this.$store.commit("getUserInfos", result);
+            this.$router.push("/dashboard");
+          }
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
 .register {
-    margin-top: 4em;
+  margin-top: 4em;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -129,5 +181,9 @@ export default {};
   .register-form {
     width: 80%;
   }
+}
+.errors {
+  color: red;
+  text-align: center;
 }
 </style>

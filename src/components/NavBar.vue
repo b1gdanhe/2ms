@@ -6,14 +6,23 @@
       <li class="menu-items">
         <a href="/about">A propos</a>
       </li>
-      <li class="menu-items"><a href="">Contacts</a></li>
+      <li class="menu-items"><a href="/contact">Contacts</a></li>
     </ul>
     <div class="right-items">
       <a href="/login">
-        <button class="login" >Se connecter</button>
+        <button class="login" v-if="$store.state.authenticated == false">
+          Se connecter
+        </button>
       </a>
       <a href="/register">
-        <button class="register">S'inscrire</button>
+        <button class="register" v-if="$store.state.authenticated == false">
+          S'inscrire
+        </button>
+      </a>
+      <a href="/register">
+        <button class="register" v-if="$store.state.authenticated == true">
+          Se deconnecter
+        </button>
       </a>
     </div>
     <div class="toggle" @click="toogleMenu">
@@ -77,7 +86,7 @@ export default {
   position: fixed;
   width: 100%;
   background-color: white;
-  top:0px
+  top: 0px;
 }
 
 .menu {

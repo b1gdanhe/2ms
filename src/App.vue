@@ -1,12 +1,15 @@
 <template>
   <NavBar />
-   <router-view class="bod" />
-  <Footer /> 
+  <router-view />
+  <Footer />
 </template>
 <script>
 import NavBar from "./components/NavBar.vue";
 import Footer from "./components/Footer.vue";
 export default {
+  beforeMount() {
+    this.$store.commit("persistStore");
+  },
   components: {
     NavBar,
     Footer,
@@ -20,9 +23,7 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
-bod{
-  margin-top: 200em;
-}
+
 #app {
   min-height: 100vh;
 }
