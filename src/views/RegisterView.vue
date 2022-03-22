@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     register() {
-      const url = "http://localhost:8000/api/register";
+      const url = $BASE+"api/register";
       let new_user = {
         name: this.name,
         email: this.email,

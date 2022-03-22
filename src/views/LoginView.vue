@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     login() {
-      const url = "http://localhost:8000/api/login";
+      const url = $BASE+"api/login";
 
       let login_credentials = {
         email: this.email,

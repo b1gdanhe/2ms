@@ -61,7 +61,7 @@ export default {
       this.$router.push("register");
     },
     logout() {
-      const url = "http://localhost:8000/api/logout";
+      const url = $BASE+"api/logout";
       let requestOptions = {
         method: "POST",
         headers: {
