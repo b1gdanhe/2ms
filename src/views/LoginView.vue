@@ -58,6 +58,7 @@ export default {
           return response.json();
         })
         .then((result) => {
+          console.log(result);
           if (result.errors) {
             if (result.errors.email) {
               this.errors_email = result.errors.email[0];
@@ -65,6 +66,9 @@ export default {
             if (result.errors.password) {
               this.errors_password = result.errors.password[0];
             }
+          }
+          if (result.errors_message) {
+            alert(result.errors_message);
           }
           if (result.token) {
             console.log(result);
