@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     login() {
-      const url = $BASE+"api/login";
+      const url = "https://les2ms-api.herokuapp.com/api/login";
 
       let login_credentials = {
         email: this.email,

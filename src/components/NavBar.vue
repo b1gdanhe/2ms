@@ -61,7 +61,7 @@ export default {
       this.$router.push("register");
     },
     logout() {
-      const url = $BASE+"api/logout";
+      const url = "https://les2ms-api.herokuapp.com/api/logout";
       let requestOptions = {
         method: "POST",
         headers: {

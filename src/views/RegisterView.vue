@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     register() {
-      const url = $BASE+"api/register";
+      const url = "https://les2ms-api.herokuapp.com/api/register";
       let new_user = {
         name: this.name,
         email: this.email,
