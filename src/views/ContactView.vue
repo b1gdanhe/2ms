@@ -18,7 +18,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      email: "",
+      subject: "",
+    };
+  },
+};
 </script>
 
 <style scoped>
@@ -52,6 +59,7 @@ export default {};
   padding: 1em 1em;
   font-size: 15px;
   min-width: 270px;
+  border-radius: 25px;
 }
 .contact_form div textarea {
   width: 100%;
@@ -63,6 +71,7 @@ export default {};
   font-size: 15px;
   resize: none;
   min-width: 270px;
+  border-radius: 25px;
 }
 @media screen and (max-width: 280px) {
   .contact_form div {

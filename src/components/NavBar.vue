@@ -19,11 +19,14 @@
           S'inscrire
         </button>
       </a>
-      <a href="/register">
-        <button class="register" v-if="$store.state.authenticated == true">
-          Se deconnecter
-        </button>
-      </a>
+
+      <button
+        class="register"
+        v-if="$store.state.authenticated == true"
+        @click="logout"
+      >
+        Se deconnecter
+      </button>
     </div>
     <div class="toggle" @click="toogleMenu">
       <div class="line1"></div>
@@ -56,6 +59,28 @@ export default {
     },
     registerPage() {
       this.$router.push("register");
+    },
+    logout() {
+      const url = "http://localhost:8000/api/logout";
+      let requestOptions = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.$store.state.token,
+        },
+      };
+      fetch(url, requestOptions)
+        .then((response) => {
+          return response.json();
+        })
+        .then((result) => {
+          if (result.message == "logout") {
+            localStorage.removeItem("INFO");
+            this.$store.commit("removeUserInfos");
+            this.$router.push("/login");
+          }
+        });
     },
   },
 };
