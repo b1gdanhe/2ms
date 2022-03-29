@@ -1,5 +1,6 @@
 <template>
   <div class="register">
+    <Alert v-if="show == true" />
     <div class="register-form">
       <div>
         <h1 style="color: #1c2851">Inscription</h1>
@@ -42,11 +43,16 @@
         ></span
       >
     </div>
+    <Alert v-if="show == true" />
   </div>
 </template>
 
 <script>
+import Alert from "@/components/Alert.vue";
 export default {
+  components: {
+    Alert,
+  },
   data() {
     return {
       name: "",
@@ -56,6 +62,7 @@ export default {
       errors_name: null,
       errors_email: null,
       errors_password: null,
+      show: false,
     };
   },
   methods: {
@@ -91,8 +98,9 @@ export default {
               this.errors_password = result.errors.password[0];
             }
           }
-          if(result.token){
-            this.$router.push('/login')
+          if (result.token) {
+            this.show = !this.show;
+            this.$router.push("/login");
           }
           console.log(result);
         });
@@ -106,6 +114,8 @@ export default {
 </script>
 
 <style scoped>
+#success {
+}
 .register {
   min-height: 100vh;
   display: flex;
