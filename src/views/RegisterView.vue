@@ -102,7 +102,7 @@ export default {
             this.show = !this.show;
             setTimeout(() => {
               this.$router.push("/login");
-            }, 5000);
+            }, 3000);
           }
           console.log(result);
         });
