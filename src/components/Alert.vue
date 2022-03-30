@@ -25,17 +25,20 @@ export default {};
 <style>
 .alert {
   position: absolute;
-  top: 5em;
+  top: 5.5em;
   right: 1em;
   width: 15em;
+  height: 6em;
   display: flex;
-  background-color: seagreen;
-  box-shadow: 0px 5px 5px -5px green;
-  border-radius: 55px;
+  background-color: rgb(23, 201, 100);
+  box-shadow: 0px 5px 5px -5px black;
+  border-radius: 15px;
   padding: 1em;
   align-items: center;
   gap: 1em;
   font-weight: bold;
   color: white;
+  transform:rotate(8deg);
+  transition: 0.5 ease-in-out
 }
 </style>    

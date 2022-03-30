@@ -93,7 +93,7 @@ export default {
   cursor: pointer;
 }
 .toggle div {
-  background-color: #1c2851;
+  background-color: #5b3cc4;
   height: 4px;
   width: 20px;
 }
@@ -106,7 +106,7 @@ export default {
   min-height: 4em;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  box-shadow: 0px 5px 5px -5px #1c2851;
+  box-shadow: 0px 5px 5px -5px #5b3cc4;
   z-index: 400;
   position: fixed;
   width: 100%;
@@ -131,7 +131,7 @@ export default {
 }
 .menu-items a {
   text-decoration: none;
-  color: #1c2851;
+  color: #5b3cc4;
   transition: font-size 1s;
 }
 .logo {
@@ -139,7 +139,7 @@ export default {
   text-transform: uppercase;
   letter-spacing: 2px;
   font-size: 21px;
-  color: #1c2851;
+  color: #5b3cc4;
   cursor: pointer;
 }
 .right-items {
@@ -148,9 +148,9 @@ export default {
   gap: 0.5em;
 }
 .login {
-  border: 2px solid #1c2851;
+  border: 2px solid #5b3cc4;
   background-color: white;
-  color: #1c2851;
+  color: #5b3cc4;
   outline: none;
   height: 3em;
   border-radius: 24px;
@@ -163,7 +163,7 @@ export default {
   transition: 0.5s ease;
 }
 .register {
-  background-color: #1c2851;
+  background-color: #5b3cc4;
   color: white;
   outline: none;
   border: none;
@@ -178,12 +178,12 @@ export default {
   transition: 0.5s ease;
 }
 .register:hover {
-  border: 2px solid #1c2851;
+  border: 2px solid #5b3cc4;
   background-color: white;
-  color: #1c2851;
+  color: #5b3cc4;
 }
 .login:hover {
-  background-color: #1c2851;
+  background-color: #5b3cc4;
   color: white;
 }
 @media screen and (max-width: 768px) {
@@ -210,7 +210,7 @@ export default {
     top: 250px;
     width: 100%;
     height: 200px;
-    box-shadow: 0px 5px 5px -5px #1c2851;
+    box-shadow: 0px 5px 5px -5px #5b3cc4;
     justify-content: center;
     align-items: center;
     left: 0;
@@ -225,7 +225,7 @@ export default {
     position: absolute;
     top: 265px;
     width: 100%;
-    box-shadow: 0px 5px 5px -5px #1c2851;
+    box-shadow: 0px 5px 5px -5px #5b3cc4;
     justify-content: center;
     align-items: center;
     left: 0;

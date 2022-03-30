@@ -58,6 +58,7 @@ export default {};
   align-items: center;
   justify-content: space-between;
   padding: 0px 25px;
+  z-index: 99;
 }
 .part2 {
   display: flex;

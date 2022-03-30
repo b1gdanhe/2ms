@@ -2,7 +2,7 @@
   <div class="register">
     <div class="register-form">
       <div>
-        <h1 style="color: #1c2851">Connexion</h1>
+        <h1 style="color: #5b3cc4">Connexion</h1>
       </div>
       <div class="email-div">
         <input type="email" placeholder="Adress Email" v-model="email" />
@@ -97,7 +97,7 @@ export default {
   gap: 2em;
   min-width: 40%;
   padding: 25px 10px;
-  box-shadow: -5px 0px 5px -5px #1c2851;
+  box-shadow: -5px 0px 5px -5px #5b3cc4;
   border-radius: 25px;
 }
 .username-div {
@@ -110,11 +110,11 @@ export default {
   padding: 0 1.5em;
   font-size: 16px;
   border-left: none;
-  border-right: 1px solid #1c2851;
+  border-right: 1px solid #5b3cc4;
   border-top: none;
   border-bottom: none;
   outline: none;
-  box-shadow: 0px 5px 5px -5px #1c2851;
+  box-shadow: 0px 5px 5px -5px #5b3cc4;
 }
 .email-div {
   width: 100%;
@@ -126,11 +126,11 @@ export default {
   padding: 0 1.5em;
   font-size: 16px;
   border-left: none;
-  border-right: 1px solid #1c2851;
+  border-right: 1px solid #5b3cc4;
   border-top: none;
   border-bottom: none;
   outline: none;
-  box-shadow: 0px 5px 5px -5px #1c2851;
+  box-shadow: 0px 5px 5px -5px #5b3cc4;
 }
 .password-div {
   width: 100%;
@@ -142,11 +142,11 @@ export default {
   padding: 0 1.5em;
   font-size: 16px;
   border-left: none;
-  border-right: 1px solid #1c2851;
+  border-right: 1px solid #5b3cc4;
   border-top: none;
   border-bottom: none;
   outline: none;
-  box-shadow: 0px 5px 5px -5px #1c2851;
+  box-shadow: 0px 5px 5px -5px #5b3cc4;
 }
 .password-conf-div {
   width: 100%;
@@ -158,16 +158,16 @@ export default {
   padding: 0 1.5em;
   font-size: 16px;
   border-left: none;
-  border-right: 1px solid #1c2851;
+  border-right: 1px solid #5b3cc4;
   border-top: none;
   border-bottom: none;
   outline: none;
-  box-shadow: 0px 5px 5px -5px #1c2851;
+  box-shadow: 0px 5px 5px -5px #5b3cc4;
 }
 .action {
   border: none;
   outline: none;
-  background-color: #1c2851;
+  background-color: #5b3cc4;
   color: white;
   width: 100%;
   min-height: 3em;

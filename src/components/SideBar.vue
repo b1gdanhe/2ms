@@ -128,7 +128,7 @@
             d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
           />
         </svg>
-        <span class="logout-text">{{$store.state.user.name}}</span>
+        <!-- <span class="logout-text">{{$store.state.user.name}}</span> -->
       </div>
       <div class="rediuse">
         <svg
@@ -160,7 +160,8 @@ export default {
       if (container.style.width == "" || container.style.height == "17em") {
         container.classList.toggle("container-red");
       } else {
-        container.classList.remove("container-red");logout
+        container.classList.remove("container-red");
+        logout;
       }
     },
   },
@@ -186,7 +187,7 @@ export default {
   height: 100vh;
   justify-content: space-between;
   width: 17em;
-  background-color: #1c2851;
+  background-color: #5b3cc4;
   padding-top: 2em;
   padding-bottom: 2em;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -229,7 +230,7 @@ export default {
 }
 .menu-item:hover {
   background-color: white;
-  color: #1c2851;
+  color: #5b3cc4;
   box-shadow: 0px 0px 5px 1px black;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
@@ -238,7 +239,7 @@ export default {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
   background-color: white;
-  color: #1c2851;
+  color: #5b3cc4;
 }
 
 .menu-link {
@@ -269,7 +270,7 @@ export default {
 }
 .logout:hover {
   background-color: white;
-  color: #1c2851;
+  color: #5b3cc4;
   box-shadow: 0px 0px 5px 1px black;
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
@@ -297,7 +298,7 @@ export default {
   height: 100vh;
   justify-content: space-between;
   width: 5em;
-  background-color: #1c2851;
+  background-color: #5b3cc4;
   padding-top: 2em;
   padding-bottom: 2em;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -315,33 +316,5 @@ export default {
 }
 .container-red .rediuse svg {
   transform: rotate(180deg);
-}
-@media screen and (max-width: 768px) {
-  .container .sidebar {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    height: 100vh;
-    justify-content: space-between;
-    width: 5em;
-    background-color: #1c2851;
-    padding-top: 2em;
-    padding-bottom: 2em;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    border: none;
-  }
-  .container .logo .logo_text {
-    display: none;
-  }
-  .container .menu-test {
-    display: none;
-  }
-  .container .logout-text {
-    display: none;
-  }
-  .container-red .rediuse svg {
-    transform: rotate(180deg);
-  }
 }
 </style>

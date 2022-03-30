@@ -108,7 +108,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
-  background: #1c2851;
+  background: #5b3cc4;
   margin-top: 4em
 }
 .action {
@@ -121,7 +121,7 @@ export default {
 }
 
 .image {
-  background: #1c2851 url("../assets/ban1.png") no-repeat center;
+  background: #5b3cc4 url("../assets/ban1.png") no-repeat center;
   background-size: 70% 70%;
   width: 50%;
   height: 100%;
@@ -135,7 +135,7 @@ export default {
   font-size: 20px;
   font-weight: bold;
   border-radius: 35px;
-  color: #1c2851;
+  color: #5b3cc4;
 }
 .home button:hover {
   background-color: rgb(220, 219, 219);
@@ -162,7 +162,7 @@ export default {
     text-align: center;
   }
   .image {
-    background: #1c2851 url("../assets/ban1.png") no-repeat center;
+    background: #5b3cc4 url("../assets/ban1.png") no-repeat center;
     background-size: 70% 70%;
     width: 100%;
     height: 100%;
