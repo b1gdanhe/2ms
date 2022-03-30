@@ -124,7 +124,7 @@
 
 <script>
 import SideBar from "../../components/SideBar.vue";
-import Profile from "../../components/Profile.vue";
+import Profile from "../../components/etudiants/Profile.vue";
 export default {
   name: "DashBoardView",
   components: {
