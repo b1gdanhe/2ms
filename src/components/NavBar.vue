@@ -14,6 +14,11 @@
           Se connecter
         </button>
       </a>
+      <a href="/dashboard">
+        <button class="login" v-if="$store.state.authenticated == true">
+          DashBoard
+        </button>
+      </a>
       <a href="/register">
         <button class="register" v-if="$store.state.authenticated == false">
           S'inscrire
