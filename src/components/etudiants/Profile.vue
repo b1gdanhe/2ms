@@ -29,8 +29,8 @@
         </div>
         <div class="date-card">
           <span class="lab">Date de naissance</span>
-          <span class="content" v-if="$store.state.user.date">{{
-            $store.state.user.date
+          <span class="content" v-if="$store.state.user.dates">{{
+            $store.state.user.dates
           }}</span>
         </div>
         <button @click="ed = true">Modifier son profile</button>

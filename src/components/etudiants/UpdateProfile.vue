@@ -79,7 +79,6 @@ export default {
         dates: this.dates,
         eglise: this.eglise,
       };
-      console.log(user_info);
       const url =
         "https://les2ms-api.herokuapp.com/api/userupdate/" +
         this.$store.state.user.id;
