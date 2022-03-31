@@ -3,21 +3,29 @@
   <div class="editor-container" v-if="ed">
     <div class="editor-modal">
       <input type="text " placeholder="Name" v-model="name" />
-      <div v-if="this.errors_name">{{ this.errors_name }}</div>
+      <div v-if="this.errors_name" style="color: red; font-size: 12px">
+        {{ this.errors_name }}
+      </div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
       <input type="email" placeholder="Email" v-model="email" />
-      <div v-if="this.errors_email">{{ this.errors_email }}</div>
+      <div v-if="this.errors_email" style="color: red; font-size: 12px">
+        {{ this.errors_email }}
+      </div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
       <input type="date" placeholder="Date de naissance" v-model="dates" />
-      <div v-if="this.errors_dates">{{ this.errors_dates }}</div>
-      >
+      <div v-if="this.errors_dates" style="color: red; font-size: 12px">
+        {{ this.errors_dates }}
+      </div>
+
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
       <input
         type="text"
         placeholder="Eglise locale frequentee"
         v-model="eglise"
       />
-      <div v-if="this.errors_eglise">{{ this.errors_eglise }}</div>
+      <div v-if="this.errors_eglise" style="color: red; font-size: 12px">
+        {{ this.errors_eglise }}
+      </div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
       <select v-model="selected" class="editor-select">
         <option value="">Pays</option>
@@ -30,8 +38,10 @@
         </option>
         <option value="">Pays</option>
       </select>
-      <div v-if="this.errors_country">{{ this.errors_country }}</div>
-      >
+      <div v-if="this.errors_country" style="color: red; font-size: 12px">
+        {{ this.errors_country }}
+      </div>
+
       <div class="editor-buttons">
         <button class="editor-go" @click="saveProfile">Enregistrer</button>
         <button class="editor-cancel" @click="closeEditModal">Retourner</button>
