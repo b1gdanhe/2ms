@@ -66,8 +66,8 @@ export default {
       message: null,
       contries: this.$store.state.contries,
       selected: "",
-      dates: null,
-      eglise: null,
+      dates: "",
+      eglise: "",
     };
   },
   methods: {
