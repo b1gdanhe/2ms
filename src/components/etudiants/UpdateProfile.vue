@@ -4,7 +4,19 @@
     <div class="editor-modal">
       <input type="text " placeholder="Name" v-model="name" />
       <div v-if="this.errors_name">{{ this.errors_name }}</div>
+      <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
       <input type="email" placeholder="Email" v-model="email" />
+      <div v-if="this.errors_email">{{ this.errors_email }}</div>
+      <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
+      <input type="date" placeholder="Date de naissance" v-model="date" />
+      <div v-if="this.errors_email">{{ this.errors_email }}</div>
+      <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
+      <select v-model="selected">
+        <option v-for="contry in contries" :key="contry.id" value="contry.name">
+          {{ contry.name }}
+        </option>
+        <option value="">Pays</option>
+      </select>
       <div v-if="this.errors_email">{{ this.errors_email }}</div>
       <div class="editor-buttons">
         <button class="editor-go" @click="saveProfile">Enregistrer</button>
@@ -25,6 +37,8 @@ export default {
       errors_name: null,
       errors_email: null,
       message: null,
+      contries: this.$store.state.contries,
+      selected: null,
     };
   },
   methods: {
