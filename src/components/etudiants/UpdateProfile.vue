@@ -11,8 +11,16 @@
       <input type="date" placeholder="Date de naissance" v-model="date" />
       <div v-if="this.errors_email">{{ this.errors_email }}</div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
-      <select v-model="selected">
-        <option v-for="contry in contries" :key="contry.id" value="contry.name">
+      <input
+        type="text"
+        placeholder="Eglise locale frequentee"
+        v-model="eglise"
+      />
+      <div v-if="this.errors_email">{{ this.errors_email }}</div>
+      <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
+      <select v-model="selected" class="editor-select">
+        <option value="">Pays</option>
+        <option v-for="contry in contries" :key="contry.id" :value="contry.name">
           {{ contry.name }}
         </option>
         <option value="">Pays</option>
@@ -38,7 +46,9 @@ export default {
       errors_email: null,
       message: null,
       contries: this.$store.state.contries,
-      selected: null,
+      selected: "",
+      date: null,
+      eglise: null,
     };
   },
   methods: {
@@ -46,7 +56,11 @@ export default {
       let user_info = {
         name: this.name,
         email: this.email,
+        country: this.selected,
+        date: this.date,
+        eglise: this.eglise,
       };
+      console.log(user_info);
       const url =
         "https://les2ms-api.herokuapp.com/api/userupdate/" +
         this.$store.state.user.id;
@@ -126,7 +140,7 @@ export default {
   gap: 16px;
   background-color: #5b3cc4;
   padding: 5px 15px;
-  height: 15em;
+  height: 18em;
   border-radius: 15px;
 }
 .editor-modal input {
@@ -135,6 +149,7 @@ export default {
   outline: none;
   border-radius: 15px;
   padding: 0px 15px;
+  cursor: pointer;
 }
 .editor-modal .editor-buttons {
   display: flex;
@@ -151,6 +166,31 @@ export default {
   font-weight: 700;
   cursor: pointer;
 }
+.editor-select {
+  height: 3em;
+  border: none;
+  outline: none;
+  border-radius: 15px;
+  padding: 0px 15px;
+  cursor: pointer;
+  background-color: white;
+
+  /*  */
+  appearance: none;
+  -webkit-appearance: none;
+}
+.editor-select:focus {
+  background-color: lightgray;
+  color: black;
+}
+.editor-select option {
+  outline: none;
+  border: none;
+  width: 50em;
+  display: block;
+  color: black;
+}
+
 .editor-go {
   background: rgb(23, 201, 100);
 }
