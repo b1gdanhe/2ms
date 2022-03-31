@@ -8,24 +8,30 @@
       <input type="email" placeholder="Email" v-model="email" />
       <div v-if="this.errors_email">{{ this.errors_email }}</div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
-      <input type="date" placeholder="Date de naissance" v-model="date" />
-      <div v-if="this.errors_email">{{ this.errors_email }}</div>
+      <input type="date" placeholder="Date de naissance" v-model="dates" />
+      <div v-if="this.errors_dates">{{ this.errors_dates }}</div>
+      >
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
       <input
         type="text"
         placeholder="Eglise locale frequentee"
         v-model="eglise"
       />
-      <div v-if="this.errors_email">{{ this.errors_email }}</div>
+      <div v-if="this.errors_eglise">{{ this.errors_eglise }}</div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
       <select v-model="selected" class="editor-select">
         <option value="">Pays</option>
-        <option v-for="contry in contries" :key="contry.id" :value="contry.name">
+        <option
+          v-for="contry in contries"
+          :key="contry.id"
+          :value="contry.name"
+        >
           {{ contry.name }}
         </option>
         <option value="">Pays</option>
       </select>
-      <div v-if="this.errors_email">{{ this.errors_email }}</div>
+      <div v-if="this.errors_country">{{ this.errors_country }}</div>
+      >
       <div class="editor-buttons">
         <button class="editor-go" @click="saveProfile">Enregistrer</button>
         <button class="editor-cancel" @click="closeEditModal">Retourner</button>
@@ -44,10 +50,13 @@ export default {
       email: this.$store.state.user.email,
       errors_name: null,
       errors_email: null,
+      errors_eglise: null,
+      errors_country: null,
+      errors_dates: null,
       message: null,
       contries: this.$store.state.contries,
       selected: "",
-      date: null,
+      dates: null,
       eglise: null,
     };
   },
@@ -57,7 +66,7 @@ export default {
         name: this.name,
         email: this.email,
         country: this.selected,
-        date: this.date,
+        dates: this.dates,
         eglise: this.eglise,
       };
       console.log(user_info);
@@ -85,6 +94,15 @@ export default {
             }
             if (result.errors.email) {
               this.errors_email = result.errors.email[0];
+            }
+            if (result.errors.eglise) {
+              this.errors_eglise = result.errors.eglise[0];
+            }
+            if (result.errors.country) {
+              this.errors_country = result.errors.country[0];
+            }
+            if (result.errors.dates) {
+              this.errors_dates = result.errors.dates[0];
             }
           }
           if (result.token) {
@@ -139,8 +157,8 @@ export default {
   width: 40%;
   gap: 16px;
   background-color: #5b3cc4;
-  padding: 5px 15px;
-  height: 18em;
+  padding: 10px 15px;
+  height: 25em;
   border-radius: 15px;
 }
 .editor-modal input {

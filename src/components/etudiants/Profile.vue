@@ -15,11 +15,29 @@
             $store.state.user.email
           }}</span>
         </div>
+        <div class="eglise-card">
+          <span class="lab">Eglise</span>
+          <span class="content" v-if="$store.state.user.eglise">{{
+            $store.state.user.eglise
+          }}</span>
+        </div>
+        <div class="country-card">
+          <span class="lab">Pays</span>
+          <span class="content" v-if="$store.state.user.country">{{
+            $store.state.user.country
+          }}</span>
+        </div>
+        <div class="date-card">
+          <span class="lab">Date de naissance</span>
+          <span class="content" v-if="$store.state.user.date">{{
+            $store.state.user.date
+          }}</span>
+        </div>
         <button @click="ed = true">Modifier son profile</button>
       </div>
     </div>
   </div>
-  <UpdateProfile :ed="ed" :closeEditModal="closeEditModal"  />
+  <UpdateProfile :ed="ed" :closeEditModal="closeEditModal" />
 </template>
 
 <script>
@@ -55,10 +73,10 @@ export default {
   width: 60%;
   min-width: 100px;
   background-color: #5b3cc4;
-  height: 31em;
+  height: 45em;
   display: flex;
   box-shadow: 0px 5px 5px -5px black;
-  margin-top: 1em;
+  margin: 1em 0;
   flex-direction: column;
   align-items: center;
   padding: 15px 15px;
@@ -74,7 +92,7 @@ export default {
 }
 .card-body {
   width: 100%;
-  height: 60%;
+  height: 75%;
   background-color: white;
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -85,17 +103,27 @@ export default {
   width: 100%;
 }
 .name-card,
-.email-card {
+.email-card,
+.eglise-card,
+.country-card,
+.date-card {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 .name-card .lab,
-.email-card .lab {
+.email-card .lab,
+.eglise-card .lab,
+.country-card .lab,
+.date-card .lab {
   color: gray;
 }
+
 .name-card .content,
-.email-card .content {
+.email-card .content,
+.eglise-card .content,
+.country-card .content,
+.date-card .content {
   margin-left: 10px;
 }
 .card-body button {
