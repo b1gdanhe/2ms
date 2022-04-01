@@ -79,7 +79,7 @@ export default {
   width: 60%;
   min-width: 100px;
   background-color: #5b3cc4;
-  height: 45em;
+  height: 47em;
   display: flex;
   box-shadow: 0px 5px 5px -5px black;
   margin: 1em 0;
