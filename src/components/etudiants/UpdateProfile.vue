@@ -80,10 +80,10 @@ export default {
       errors_phone_number: null,
       message: null,
       contries: this.$store.state.contries,
-      selected: "",
-      dates: "",
-      eglise: "",
-      phone_number: null,
+      selected: this.$store.state.contries,
+      dates: this.$store.state.dates,
+      eglise: this.$store.state.eglise,
+      phone_number: this.$store.state.phone_number,
     };
   },
   methods: {
