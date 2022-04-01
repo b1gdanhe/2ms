@@ -13,10 +13,11 @@
       </div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
       <input
-        type="date"
+        type="text"
         placeholder="Date de naissance"
         v-model="dates"
         class="editor-dates"
+        onfocus="(this.type='date')"
       />
       <div v-if="this.errors_dates" style="color: red; font-size: 12px">
         {{ this.errors_dates }}
