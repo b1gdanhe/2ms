@@ -12,7 +12,12 @@
         {{ this.errors_email }}
       </div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
-      <input type="date" placeholder="Date de naissance" v-model="dates" />
+      <input
+        type="date"
+        placeholder="Date de naissance"
+        v-model="dates"
+        class="editor-dates"
+      />
       <div v-if="this.errors_dates" style="color: red; font-size: 12px">
         {{ this.errors_dates }}
       </div>
@@ -41,7 +46,15 @@
       <div v-if="this.errors_country" style="color: red; font-size: 12px">
         {{ this.errors_country }}
       </div>
-
+      <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
+      <input
+        type="number"
+        placeholder="Numero de telephone"
+        v-model="phone_number"
+      />
+      <div v-if="this.errors_phone_number" style="color: red; font-size: 12px">
+        {{ this.errors_phone_number }}
+      </div>
       <div class="editor-buttons">
         <button class="editor-go" @click="saveProfile">Enregistrer</button>
         <button class="editor-cancel" @click="closeEditModal">Retourner</button>
@@ -63,11 +76,13 @@ export default {
       errors_eglise: null,
       errors_country: null,
       errors_dates: null,
+      errors_phone_number: null,
       message: null,
       contries: this.$store.state.contries,
       selected: "",
       dates: "",
       eglise: "",
+      phone_number: null,
     };
   },
   methods: {
@@ -78,6 +93,7 @@ export default {
         country: this.selected,
         dates: this.dates,
         eglise: this.eglise,
+        phone_number: this.phone_number,
       };
       const url =
         "https://les2ms-api.herokuapp.com/api/userupdate/" +
@@ -112,6 +128,9 @@ export default {
             }
             if (result.errors.dates) {
               this.errors_dates = result.errors.dates[0];
+            }
+            if (result.errors.phone_number) {
+              this.errors_phone_number = result.errors.phone_number[0];
             }
           }
           if (result.token) {
@@ -205,6 +224,10 @@ export default {
   /*  */
   appearance: none;
   -webkit-appearance: none;
+}
+.editor-dates {
+  width: 100%;
+  background-color: white;
 }
 .editor-select:focus {
   background-color: lightgray;

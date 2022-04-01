@@ -32,6 +32,11 @@ const routes = [
     name: "dashboard",
     component: () => import("../views/etudiant/DashboardView.vue"),
   },
+  {
+    path: "/email-notification",
+    name: "email_notification",
+    component: () => import("../views/EmailNofication.vue"),
+  },
 ];
 
 const router = createRouter({

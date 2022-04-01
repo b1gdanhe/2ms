@@ -33,6 +33,12 @@
             $store.state.user.dates
           }}</span>
         </div>
+        <div class="phone-card">
+          <span class="lab">Numero de telephone</span>
+          <span class="content" v-if="$store.state.user.phone_number">{{
+            $store.state.user.phone_number
+          }}</span>
+        </div>
         <button @click="ed = true">Modifier son profile</button>
       </div>
     </div>
@@ -106,7 +112,8 @@ export default {
 .email-card,
 .eglise-card,
 .country-card,
-.date-card {
+.date-card,
+.phone-card {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -115,7 +122,8 @@ export default {
 .email-card .lab,
 .eglise-card .lab,
 .country-card .lab,
-.date-card .lab {
+.date-card .lab,
+.phone-card .lab {
   color: gray;
 }
 
@@ -123,7 +131,8 @@ export default {
 .email-card .content,
 .eglise-card .content,
 .country-card .content,
-.date-card .content {
+.date-card .content,
+.phone-card .card {
   margin-left: 10px;
 }
 .card-body button {
@@ -138,6 +147,7 @@ export default {
 @media screen and (max-width: 780px) {
   .card {
     width: 100%;
+    height: 49em;
   }
   .card-body {
     padding: 40px 10px;

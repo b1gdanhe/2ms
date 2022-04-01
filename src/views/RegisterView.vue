@@ -98,10 +98,10 @@ export default {
               this.errors_password = result.errors.password[0];
             }
           }
-          if (result.token) {
+          if (result.message) {
             this.show = !this.show;
             setTimeout(() => {
-              this.$router.push("/login");
+              this.$router.push("/email-notification");
             }, 3000);
           }
           console.log(result);
