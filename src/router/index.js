@@ -37,6 +37,11 @@ const routes = [
     name: "email_notification",
     component: () => import("../views/EmailNofication.vue"),
   },
+  {
+    path: "/adm",
+    name: "adm",
+    component: () => import("../views/admin/Dashbord.vue"),
+  },
 ];
 
 const router = createRouter({
