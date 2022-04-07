@@ -3,12 +3,12 @@
   <div class="editor-container" v-if="ed">
     <div class="editor-modal">
       <input type="text " placeholder="Name" v-model="name" />
-      <div v-if="this.errors_name" style="color: red; font-size: 12px">
+      <div v-if="this.errors_name" style="color: white; font-size: 12px">
         {{ this.errors_name }}
       </div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
       <input type="email" placeholder="Email" v-model="email" />
-      <div v-if="this.errors_email" style="color: red; font-size: 12px">
+      <div v-if="this.errors_email" style="color: white; font-size: 12px">
         {{ this.errors_email }}
       </div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
@@ -19,7 +19,7 @@
         class="editor-dates"
         onfocus="(this.type='date')"
       />
-      <div v-if="this.errors_dates" style="color: red; font-size: 12px">
+      <div v-if="this.errors_dates" style="color: white; font-size: 12px">
         {{ this.errors_dates }}
       </div>
 
@@ -29,7 +29,7 @@
         placeholder="Eglise locale frequentee"
         v-model="eglise"
       />
-      <div v-if="this.errors_eglise" style="color: red; font-size: 12px">
+      <div v-if="this.errors_eglise" style="color: white; font-size: 12px">
         {{ this.errors_eglise }}
       </div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
@@ -44,7 +44,7 @@
         </option>
         <option value="">Pays</option>
       </select>
-      <div v-if="this.errors_country" style="color: red; font-size: 12px">
+      <div v-if="this.errors_country" style="color: white; font-size: 12px">
         {{ this.errors_country }}
       </div>
       <!-- jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj -->
@@ -53,7 +53,7 @@
         placeholder="Numero de telephone"
         v-model="phone_number"
       />
-      <div v-if="this.errors_phone_number" style="color: red; font-size: 12px">
+      <div v-if="this.errors_phone_number" style="color: white; font-size: 12px">
         {{ this.errors_phone_number }}
       </div>
       <div class="editor-buttons">

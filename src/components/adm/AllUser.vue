@@ -5,7 +5,7 @@
     </div>
     <div class="main">
       <div class="title">Utilisateurs</div>
-      <div class="description">Tous les utilisateurs</div>
+      <div class="description">All user</div>
       <div class="table-card">
         <div class="tools">
           <div class="filter">
@@ -30,7 +30,7 @@
             </select>
           </div>
           <div class="search">
-            <input type="search" placeholder="Recherche" />
+            <input type="search" placeholder="Recherche" v-model="seach" />
           </div>
         </div>
         <div class="table-container">
@@ -46,7 +46,7 @@
               <th>Role</th>
               <th>ACTION</th>
             </tr>
-            <tr v-for="user in alluser" :key="user">
+            <tr v-for="user in searchUser" :key="user">
               <td>{{ user.id }}</td>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
@@ -58,7 +58,9 @@
               <td>
                 <div class="user-action">
                   <button class="edit">Edit</button>
-                  <button class="delete">Delete</button>
+                  <button class="delete" @click="deleteUser(user.id)">
+                    Delete
+                  </button>
                 </div>
               </td>
             </tr>
@@ -68,11 +70,9 @@
           <div class="total">total: 15882</div>
           <div class="pagination">
             <ul class="paginaton-card">
-              <li>1</li>
-              <li>2</li>
-              <li>3</li>
-              <li>4</li>
-              <li>5</li>
+              <li v-for="pages in paginate" :key="pages" @click="getAll(pages)">
+                {{ pages }}
+              </li>
               <li>suivant</li>
             </ul>
           </div>
@@ -84,30 +84,89 @@
 
 <script>
 export default {
-  beforeMount() {
+  mounted() {
+    this.getAllUser();
     setTimeout(() => {
       const loader = document.querySelector(".loader-container");
       loader.style.display = "none";
-    }, 3000);
-    fetch("https://les2ms-api.herokuapp.com/api/mngusers", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer " + this.$store.state.token,
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((result) => {
-        console.log(result);
-        this.alluser = result;
-      });
+    }, 1000);
   },
   data() {
     return {
-      alluser: null,
+      alluser: [],
+      page: null,
+      paginate: [],
+      seach: "",
     };
+  },
+  computed: {
+    searchUser() {
+      return this.alluser.filter(
+        (user) =>
+          user.name.toLowerCase().includes(this.seach.toLowerCase()) ||
+          user.email.toLowerCase().includes(this.seach.toLowerCase())
+      );
+    },
+  },
+
+  methods: {
+    getAll(page) {
+      const url = "https://les2ms-api.herokuapp.com/api/mngusers?page="+page;
+      let requestOptions = {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.$store.state.token,
+        },
+      };
+      fetch(url, requestOptions)
+        .then((response) => {
+          return response.json();
+        })
+        .then((result) => {
+          console.log(result);
+          this.alluser = result.data;
+          this.page = result.last_page;
+          this.pagination();
+        })
+        .catch((errors) => {
+          console.log(errors);
+        });
+    },
+    getAllUser() {
+      const url = "https://les2ms-api.herokuapp.com/api/mngusers";
+      let requestOptions = {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.$store.state.token,
+        },
+      };
+      fetch(url, requestOptions)
+        .then((response) => {
+          return response.json();
+        })
+        .then((result) => {
+          console.log(result);
+          this.alluser = result.data;
+          this.page = result.last_page;
+          this.pagination();
+        })
+        .catch((errors) => {
+          console.log(errors);
+        });
+    },
+    pagination() {
+      if (this.page != null) {
+        for (var i = 1; i <= this.page; i++) {
+          this.paginate[i - 1] = i;
+        }
+        this.paginate = Object.assign({}, this.paginate);
+      }
+    },
+    deleteUser(id) {},
   },
 };
 </script>
@@ -246,15 +305,16 @@ tr:nth-child(odd) {
 }
 .paginaton-card li {
   list-style: none;
-  min-width: 3em;
+  min-width: 2em;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #242145;
   color: #242145;
   transition: 0.5s ease;
   cursor: pointer;
   padding: 0 5px;
+  border-radius: 5px;
+  height: 2em;
 }
 .paginaton-card li:hover {
   background-color: #242145;
