@@ -167,7 +167,7 @@ export default {
         .then((result) => {
           if (result.message) {
             this.deleteMessage = result.message;
-
+            location.reload();
           }
         })
         .catch((errors) => {
@@ -350,5 +350,4 @@ tr:nth-child(odd) {
     flex-direction: column;
   }
 }
-
 </style>
