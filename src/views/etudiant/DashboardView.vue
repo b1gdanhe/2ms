@@ -43,7 +43,7 @@
             ><span>Home</span></a
           >
         </li>
-        <li class="item">
+        <li class="item" @click="componentsManager('profile')">
           <a href="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +61,7 @@
             <span>Profile</span></a
           >
         </li>
-        <li class="item">
+        <li class="item" @click="componentsManager('courses')">
           <a href="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +79,7 @@
             <span>Course</span>
           </a>
         </li>
-        <li class="item">
+        <li class="item" @click="componentsManager('quizzes')">
           <a href="#">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +96,7 @@
                 d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
               />
             </svg>
-            <span>Quiz</span>
+            <span>Quizzes</span>
           </a>
         </li>
       </ul>
@@ -117,7 +117,9 @@
           />
         </svg>
       </div>
-      <Profile />
+      <Profile v-if="profileShow == true" />
+      <Courses v-if="coursesShow == true" />
+      <Quizzes v-if="quizzesShow == true" />
     </div>
   </div>
 </template>
@@ -125,13 +127,39 @@
 <script>
 import SideBar from "../../components/SideBar.vue";
 import Profile from "../../components/etudiants/Profile.vue";
+import Courses from "@/components/etudiants/Courses.vue";
+import Quizzes from "@/components/etudiants/Quizzes.vue";
 export default {
   name: "DashBoardView",
   components: {
     SideBar,
     Profile,
+    Courses,
+    Quizzes,
+  },
+  data() {
+    return {
+      profileShow: false,
+      coursesShow: false,
+      quizzesShow: false,
+    };
   },
   methods: {
+    componentsManager(component) {
+      if (component == "courses") {
+        this.quizzesShow = false;
+        this.profileShow = false;
+        this.coursesShow = true;
+      } else if (component == "profile") {
+        this.quizzesShow = false;
+        this.profileShow = true;
+        this.coursesShow = false;
+      } else if (component == "quizzes") {
+        this.quizzesShow = true;
+        this.profileShow = false;
+        this.coursesShow = false;
+      }
+    },
     showSidebar() {
       const sidebar = document.querySelector(".sidebar");
       const toogle = document.querySelector(".toogle");
@@ -242,11 +270,18 @@ export default {
   border-bottom-left-radius: 25px;
   padding: 15px;
 }
+.menu li a:focus {
+  background-color: white;
+  color: #5b3cc4;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  padding: 15px;
+}
 .menu li a svg {
   margin-right: 20px;
 }
 @media screen and (max-width: 780px) {
-  .menu{
+  .menu {
     gap: 20px;
   }
   .menu li a {
@@ -256,10 +291,8 @@ export default {
     margin-right: 0;
   }
   .sidebar {
-  width: 0;
-  padding-left: 0
-  
-}
-  
+    width: 0;
+    padding-left: 0;
+  }
 }
 </style>  

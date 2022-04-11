@@ -5,25 +5,12 @@
     </div>
     <div class="main">
       <div class="title">Utilisateurs</div>
-      <div class="description">All user</div>
       <div class="table-card">
         <div class="tools">
           <div class="filter">
             filtres
             <select name="" id="" selected="value1">
               <option value="value1">Pays</option>
-              <option value="value1">value</option>
-              <option value="value1">value</option>
-              <option value="value1">value</option>
-            </select>
-            <select name="" id="" selected="value1">
-              <option value="value1">Eglise</option>
-              <option value="value1">value</option>
-              <option value="value1">value</option>
-              <option value="value1">value</option>
-            </select>
-            <select name="" id="" selected="value1">
-              <option value="value1">Role</option>
               <option value="value1">value</option>
               <option value="value1">value</option>
               <option value="value1">value</option>
@@ -57,7 +44,9 @@
               <td>{{ user.role.role }}</td>
               <td>
                 <div class="user-action">
-                  <button class="edit">Edit</button>
+                  <button class="edit">
+                    <img src="../../assets/edit.svg" alt="edit" />
+                  </button>
                   <button class="delete" @click="deleteUser(user.id)">
                     Delete
                   </button>
@@ -67,7 +56,7 @@
           </table>
         </div>
         <div class="table-footer">
-          <div class="total">total: 15882</div>
+          <div class="total">Total : {{ this.total }}</div>
           <div class="pagination">
             <ul class="paginaton-card">
               <li v-for="pages in paginate" :key="pages" @click="getAll(pages)">
@@ -97,6 +86,7 @@ export default {
       page: null,
       paginate: [],
       seach: "",
+      total: "",
     };
   },
   computed: {
@@ -111,7 +101,7 @@ export default {
 
   methods: {
     getAll(page) {
-      const url = "https://les2ms-api.herokuapp.com/api/mngusers?page="+page;
+      const url = "https://les2ms-api.herokuapp.com/api/mngusers?page=" + page;
       let requestOptions = {
         method: "GET",
         headers: {
@@ -152,6 +142,7 @@ export default {
           console.log(result);
           this.alluser = result.data;
           this.page = result.last_page;
+          this.total = result.total;
           this.pagination();
         })
         .catch((errors) => {
@@ -166,7 +157,26 @@ export default {
         this.paginate = Object.assign({}, this.paginate);
       }
     },
-    deleteUser(id) {},
+    deleteUser(UserId) {
+      const url = "https://les2ms-api.herokuapp.com/api/mngusers/" + UserId;
+      let requestOptions = {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + this.$store.state.token,
+        },
+      };
+      fetch(url, requestOptions)
+        .then((response) => {
+          return response.json();
+        })
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((errors) => {
+          console.log(errors);
+        });
+    },
   },
 };
 </script>
@@ -182,7 +192,7 @@ export default {
 .main {
   width: 100%;
   min-height: 100vh;
-  background-color: white;
+  background-color: lightgray;
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -192,35 +202,24 @@ export default {
 .title {
   display: flex;
   width: 100%;
-  height: 2em;
+  height: 3em;
   font-size: 20px;
   font-weight: 700;
   background-color: white;
   align-items: center;
   box-shadow: 0px 0px 2px 1px lightgray;
-  border-radius: 15px 15px 0 0;
+  border-radius: 10px;
   padding: 0px 25px;
   color: gray;
 }
-.description {
-  display: flex;
-  width: 100%;
-  height: 5em;
-  font-size: 12px;
-  font-weight: 500;
-  background-color: white;
-  align-items: center;
-  box-shadow: 0px 0px 2px 1px lightgray;
-  padding: 0px 25px;
-  color: gray;
-}
+
 .table-card {
   display: flex;
   width: 100%;
   align-items: center;
   flex-direction: column;
   box-shadow: 0px 0px 2px 1px lightgray;
-  border-radius: 0 0 15px 15px;
+  border-radius: 10px;
   padding: 15px 25px;
   gap: 16px;
   color: gray;
@@ -267,20 +266,19 @@ export default {
   border-collapse: collapse;
   border-spacing: 0;
   font-size: 12px;
-  box-shadow: 0px 0px 1px 1px lightgray;
+  box-shadow: 0px 0px 10px 0.3px lightgray;
+  border-radius: 7px;
+  overflow: hidden;
 }
+
 th,
 td {
   padding: 10px 15px;
 }
 th {
-  background-color: #242145;
+  background-color: #5b3cc4;
   color: white;
   text-transform: uppercase;
-}
-
-tr {
-  cursor: pointer;
 }
 
 tr:nth-child(odd) {
@@ -293,7 +291,8 @@ tr:nth-child(odd) {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 0px 1px 1px gray;
+  box-shadow: 0px 0px 10px 0.3px lightgray;
+  border-radius: 7px;
   padding: 0px 15px;
 }
 
@@ -309,7 +308,7 @@ tr:nth-child(odd) {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #242145;
+  color: #5b3cc4;
   transition: 0.5s ease;
   cursor: pointer;
   padding: 0 5px;
@@ -317,7 +316,7 @@ tr:nth-child(odd) {
   height: 2em;
 }
 .paginaton-card li:hover {
-  background-color: #242145;
+  background-color: #5b3cc4;
   color: white;
 }
 .user-action {
@@ -335,11 +334,13 @@ tr:nth-child(odd) {
   background-color: rgb(242, 19, 93);
   padding: 5px 10px;
   color: white;
+  cursor: pointer;
 }
 .user-action .edit {
-  background-color: #242145;
+  background-color: #5b3cc4;
   padding: 5px 10px;
   color: white;
+  cursor: pointer;
 }
 @media screen and (max-width: 798px) {
   .tools {
@@ -354,7 +355,8 @@ tr:nth-child(odd) {
 }
 .loader-container {
   position: fixed;
-  background-color: #242145;
+  background-color: rgba(0, 0, 0, 0.9);
+  filter: blur(1px);
   top: 0;
   left: 0;
   bottom: 0;
@@ -364,10 +366,11 @@ tr:nth-child(odd) {
   align-items: center;
 }
 .loader {
+  filter: blur(0);
   width: 10em;
   height: 10em;
   border: 15px solid white;
-  border-top-color: #242145;
+  border-top-color: #5b3cc4;
   border-radius: 50%;
   animation: loading 0.7s infinite;
   transition: opacity 0.7s, visibility 0.7s;
