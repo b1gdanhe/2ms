@@ -6,12 +6,31 @@
         <div class="tools">
           <div class="filter">
             filtres
-            <select name="" id="" selected="value1">
-              <option value="value1">Pays</option>
-              <option value="value1">value</option>
-              <option value="value1">value</option>
-              <option value="value1">value</option>
+            <select v-model="selected" class="editor-select">
+              <option value="">Pays</option>
+              <option
+                v-for="contry in $store.state.contries"
+                :key="contry.id"
+                :value="contry.name"
+              >
+                {{ contry.name }}
+              </option>
+              <option value="">Pays</option>
             </select>
+            <div style="display: flex; flex-direction: column;">
+              <img
+                src="@/assets/sort.svg"
+                alt=""
+                style="cursor: pointer"
+                @click="sortType = 'normal'"
+              />
+              <img
+                src="@/assets/sort.svg"
+                alt=""
+                style="cursor: pointer; transform: rotate(180deg)"
+                @click="sortType = 'inverse'"
+              />
+            </div>
           </div>
           <div class="search">
             <input type="search" placeholder="Recherche" v-model="seach" />
@@ -43,7 +62,7 @@
               <td>{{ user.role.role }}</td>
               <td>
                 <div class="user-action">
-                  <button class="edit">
+                  <button class="edit" @click="ed = true">
                     <img src="../../assets/edit.svg" alt="edit" />
                   </button>
                   <button class="delete" @click="deleteUser(user.id)">
@@ -58,7 +77,11 @@
           <div class="total">Total : {{ this.total }}</div>
           <div class="pagination">
             <ul class="paginaton-card">
-              <li v-for="pages in paginate" :key="pages" @click="getAll(pages)">
+              <li
+                v-for="pages in paginates"
+                :key="pages"
+                @click="getAll(pages)"
+              >
                 {{ pages }}
               </li>
               <li>suivant</li>
@@ -66,11 +89,13 @@
           </div>
         </div>
       </div>
+      <UserUpdate :ed="ed" :closeEditModal="closeEditModal" />
     </div>
   </div>
 </template>
 
 <script>
+import UserUpdate from "@/components/adm/UserUpdate.vue";
 export default {
   mounted() {
     this.getAllUser();
@@ -80,10 +105,17 @@ export default {
       alluser: [],
       page: null,
       paginate: [],
+      paginates: {},
       seach: "",
       total: "",
       deleteMessage: "",
+      selected: "",
+      ed: false,
+      sortType: "normal",
     };
+  },
+  components: {
+    UserUpdate,
   },
   // computed: {
   //   searchUser() {
@@ -99,31 +131,42 @@ export default {
       handler(newValue) {
         if (newValue == "") {
           this.getAllUser();
+        } else {
+          const url =
+            "https://les2ms-api.herokuapp.com/api/mngusers/search/" + newValue;
+          let requestOptions = {
+            method: "GET",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + this.$store.state.token,
+            },
+          };
+          fetch(url, requestOptions)
+            .then((response) => {
+              return response.json();
+            })
+            .then((result) => {
+              this.alluser = result.data;
+              this.page = result.last_page;
+              this.total = result.total;
+              this.pagination();
+            })
+            .catch((errors) => {
+              console.log(errors);
+            });
         }
-        const url =
-          "https://les2ms-api.herokuapp.com/api/mngusers/search/" + newValue;
-        let requestOptions = {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + this.$store.state.token,
-          },
-        };
-        fetch(url, requestOptions)
-          .then((response) => {
-            return response.json();
-          })
-          .then((result) => {
-            console.log(result);
-            this.alluser = result.data;
-            this.page = result.last_page;
-            this.total = result.total;
-            this.pagination();
-          })
-          .catch((errors) => {
-            console.log(errors);
-          });
+      },
+      immediate: true,
+      deep: true,
+    },
+    sortType: {
+      handler(newValue) {
+        if (newValue == "inverse") {
+          this.alluser = this.alluser.reverse();
+        } else {
+          this.alluser = this.alluser.reverse();
+        }
       },
       immediate: true,
       deep: true,
@@ -131,8 +174,8 @@ export default {
   },
 
   methods: {
-    searchUser(sea) {
-      //
+    closeEditModal() {
+      this.ed = !this.ed;
     },
     getAll(page) {
       const url = "https://les2ms-api.herokuapp.com/api/mngusers?page=" + page;
@@ -149,7 +192,6 @@ export default {
           return response.json();
         })
         .then((result) => {
-          console.log(result);
           this.alluser = result.data;
           this.page = result.last_page;
           this.pagination();
@@ -173,7 +215,6 @@ export default {
           return response.json();
         })
         .then((result) => {
-          console.log(result);
           this.alluser = result.data;
           this.page = result.last_page;
           this.total = result.total;
@@ -185,10 +226,12 @@ export default {
     },
     pagination() {
       if (this.page != null) {
+        this.paginate = [];
         for (var i = 1; i <= this.page; i++) {
           this.paginate[i - 1] = i;
         }
-        this.paginate = Object.assign({}, this.paginate);
+        this.paginates = {};
+        this.paginates = Object.assign({}, this.paginate);
       }
     },
     deleteUser(UserId) {
