@@ -18,7 +18,7 @@ export default {
     setTimeout(() => {
       const loader = document.querySelector(".loader-container");
       loader.style.display = "none";
-    }, 4000);
+    }, 3000);
   },
   components: {
     NavBar,

@@ -30,7 +30,9 @@
               <th>Role</th>
               <th>ACTION</th>
             </tr>
-            <tr v-for="user in searchUser" :key="user">
+
+            <div v-if="alluser.length == 0" class="no-re">Aucun resultats</div>
+            <tr v-for="user in alluser" :key="user">
               <td>{{ user.id }}</td>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
@@ -83,17 +85,55 @@ export default {
       deleteMessage: "",
     };
   },
-  computed: {
-    searchUser() {
-      return this.alluser.filter(
-        (user) =>
-          user.name.toLowerCase().includes(this.seach.toLowerCase()) ||
-          user.email.toLowerCase().includes(this.seach.toLowerCase())
-      );
+  // computed: {
+  //   searchUser() {
+  //     return this.alluser.filter(
+  //       (user) =>
+  //         user.name.toLowerCase().includes(this.seach.toLowerCase()) ||
+  //         user.email.toLowerCase().includes(this.seach.toLowerCase())
+  //     );
+  //   },
+  // },
+  watch: {
+    seach: {
+      handler(newValue) {
+        if (newValue == "") {
+          this.getAllUser();
+        }
+        const url =
+          "https://les2ms-api.herokuapp.com/api/mngusers/search/" + newValue;
+        let requestOptions = {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + this.$store.state.token,
+          },
+        };
+        fetch(url, requestOptions)
+          .then((response) => {
+            return response.json();
+          })
+          .then((result) => {
+            console.log(result);
+            this.alluser = result.data;
+            this.page = result.last_page;
+            this.total = result.total;
+            this.pagination();
+          })
+          .catch((errors) => {
+            console.log(errors);
+          });
+      },
+      immediate: true,
+      deep: true,
     },
   },
 
   methods: {
+    searchUser(sea) {
+      //
+    },
     getAll(page) {
       const url = "https://les2ms-api.herokuapp.com/api/mngusers?page=" + page;
       let requestOptions = {
@@ -185,6 +225,15 @@ export default {
   box-sizing: border-box;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.no-re {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  height: 3em;
+  font-size: 20px;
 }
 .main {
   width: 100%;
