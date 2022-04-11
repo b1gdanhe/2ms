@@ -48,7 +48,7 @@
                     <img src="../../assets/edit.svg" alt="edit" />
                   </button>
                   <button class="delete" @click="deleteUser(user.id)">
-                    Delete
+                    <img src="../../assets/delete.svg" alt="edit" />
                   </button>
                 </div>
               </td>
